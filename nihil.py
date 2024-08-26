@@ -19,18 +19,18 @@ def configure_firewall(ssh, rules):
         output = stdout.read().decode()
         error = stderr.read().decode()
         if error:
-            print(f"Errore nell'eseguire la regola {rule}: {error}")
+            print(f"Error executing the rule {rule}: {error}")
         else:
-            print(f"Regola eseguita correttamente: {rule}\n{output}")
+            print(f"Rule executed correctly: {rule}\n{output}")
 
 def save_firewall_rules(ssh):
     stdin, stdout, stderr = ssh.exec_command("sudo iptables-save | sudo tee /etc/iptables/rules.v4")
     output = stdout.read().decode()
     error = stderr.read().decode()
     if error:
-        print(f"Errore nel salvare le regole del firewall: {error}")
+        print(f"Error saving firewall rules: {error}")
     else:
-        print(f"Regole del firewall salvate correttamente.\n{output}")
+        print(f"Firewall rules saved successfully.\n{output}")
 
 def main():
     show_banner()  
@@ -40,7 +40,8 @@ def main():
     password = input("password: ")
 
     ssh = connect_ssh(hostname, username, password)
-                                                                       #in futuro migliorerò questo codice
+                                                                       # in futuro migliorerò questo codice
+                            
     rules = []
     while True:
         rule = input("enter 'done' to finish: ")
